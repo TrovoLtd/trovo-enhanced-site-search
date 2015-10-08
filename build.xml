@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="TrovoEnhancedSiteSearch" basedir="." default="main">
+
+	
+	<!-- Source directories  -->
+	
+	<property name="TESS_core_src.dir" value="TESSCore/src" />
+	<property name="Wordpress_plugin_src.dir" value="WordpressPlugin/src" />
+
+	<!-- Deployment directories  -->	
+
+	<property name="Wordpress_plugin_deployment.dir" value="D:/GIT/WordPress/wp-content/plugins/trovo-enhanced-site-search" />
+	<property name="TESS_core_deployment.dir" value="tess-core" />
+	
+	<target name="clean">
+		<delete dir="${Wordpress_plugin_deployment.dir}" />
+	</target>
+	
+	<target name="build">
+		<mkdir dir="${Wordpress_plugin_deployment.dir}/${TESS_core_deployment.dir}" />
+		
+		<!-- Copy TESS Core Src -->
+		<copy todir="${Wordpress_plugin_deployment.dir}/${TESS_core_deployment.dir}">
+			<fileset dir="${TESS_core_src.dir}"	/>	
+		</copy>
+		
+		<!-- Copy Wordpress plugin src -->
+		<copy todir="${Wordpress_plugin_deployment.dir}">
+			<fileset dir="${Wordpress_plugin_src.dir}"	/>	
+		</copy>
+		
+	</target>	
+
+	<target name="main" depends="clean,build" />
+
+</project>
