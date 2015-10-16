@@ -1,6 +1,6 @@
 <?php
 
-	require_once("../../src/google-site-search-module/class.google-result.php");
+	require_once("../../src/google-site-search-module/class.GoogleResult.php");
 	require_once("PHPUnit.php");
 
 	class GoogleResult_TestCase extends PHPUnit_TestCase {
