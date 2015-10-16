@@ -28,11 +28,10 @@
 				
 				$testResult = new GoogleResult();
 				$testResult->setTitle('Title '. $i);
-				$testResults[] = $testResult;
+				$this->myGoogleResultPage->addResult($testResult);
 				
 			}
 			
-			$this->myGoogleResultPage->setResults($testResults);
 			$actualResultArray = $this->myGoogleResultPage->getResults();
 			
 			$this->assertEquals("Title 2", $actualResultArray[2]->getTitle());
