@@ -12,7 +12,7 @@
 			$this->PHPUnit_TestCase($name);
 		}
 		
-			function setUp() {
+		function setUp() {
 			$this->myGoogleResultPage = new GoogleResultPage();
 		}
 		

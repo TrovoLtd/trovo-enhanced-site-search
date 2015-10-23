@@ -1,9 +1,9 @@
 <?php
 
-	require_once("GoogleResultPageTest.php");
+	require_once("GoogleResultTest.php");
 	require_once("PHPUnit.php");
 	
-	$objSuite = new PHPUnit_TestSuite("GoogleResultPage_TestCase");
+	$objSuite = new PHPUnit_TestSuite("GoogleResult_TestCase");
 	$strResult = PHPUnit::run($objSuite);
 	
 	print $strResult->toString();
