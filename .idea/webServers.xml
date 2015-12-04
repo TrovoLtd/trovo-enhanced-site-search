@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="7bf02cda-55ec-43a1-8759-d8319c0a2a99" name="LocalWordpressPlugins" url="http://irishacademicpress-dev.local.domain">
+        <fileTransfer mountedRoot="C:\GIT\Wordpress\WordPress\wp-content\plugins" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

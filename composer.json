@@ -4,7 +4,8 @@
     },
     "autoload":{
     	"psr-4": {
-    		"Trovo\\TESS\\": "src/"
+    		"Trovo\\TESS\\": "src/",
+    		"Trovo\\TESSTests\\": "tests/"
     	}
-    }
+	}
 }

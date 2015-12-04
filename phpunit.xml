@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="tests/phpunit-bootstrap.php">
+<phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="GoogleSiteSearch">
-            <directory suffix="Tests.php">tests/TESSCore/GoogleSiteSearch</directory>
+            <directory suffix="Tests.php">tests/Core/GoogleSiteSearch</directory>
         </testsuite>
     </testsuites>
 

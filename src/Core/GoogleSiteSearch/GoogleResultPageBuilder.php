@@ -4,6 +4,8 @@
 	
 	use Trovo\TESS\Core\Interfaces\IResultPage;
 	use Trovo\TESS\Core\Interfaces\IResult;
+	use XMLReader;
+	use DOMDocument;
 
 	class GoogleResultPageBuilder {
 	
