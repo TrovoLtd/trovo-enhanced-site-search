@@ -1,7 +1,7 @@
 <?php
 
-	use Trovo\TESS\Core\GoogleSiteSearch\GoogleResult;
-	use Trovo\TESS\Core\GoogleSiteSearch\GoogleResultPage;
+	use Trovo\TESS\GoogleSiteSearch\GoogleResult;
+	use Trovo\TESS\GoogleSiteSearch\GoogleResultPage;
 	
 	class GoogleResultPage_TestCase extends PHPUnit_Framework_TestCase {
 	

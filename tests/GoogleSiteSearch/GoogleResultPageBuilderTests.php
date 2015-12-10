@@ -1,10 +1,8 @@
 <?php
 
-	//namespace Trovo\TESSTests\Core\GoogleSiteSearch;
-
-	use Trovo\TESS\Core\GoogleSiteSearch\GoogleResult;
-	use Trovo\TESS\Core\GoogleSiteSearch\GoogleResultPage;
-	use Trovo\TESS\Core\GoogleSiteSearch\GoogleResultPageBuilder;
+	use Trovo\TESS\GoogleSiteSearch\GoogleResult;
+	use Trovo\TESS\GoogleSiteSearch\GoogleResultPage;
+	use Trovo\TESS\GoogleSiteSearch\GoogleResultPageBuilder;
 	
 	class GoogleResultPageBuilder_TestCase extends PHPUnit_Framework_TestCase {
 

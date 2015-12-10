@@ -30,11 +30,10 @@
 		}
 	}
 
-	$result = new \Trovo\TESS\Core\GoogleSiteSearch\GoogleResult();
+	$result = new \Trovo\TESS\GoogleSiteSearch\GoogleResult();
 
 	$result->setTitle("Test Results");
 
 	echo $result->getTitle();
-
 
 ?>

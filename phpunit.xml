@@ -2,7 +2,7 @@
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="GoogleSiteSearch">
-            <directory suffix="Tests.php">tests/Core/GoogleSiteSearch</directory>
+            <directory suffix="Tests.php">tests/GoogleSiteSearch</directory>
         </testsuite>
     </testsuites>
 

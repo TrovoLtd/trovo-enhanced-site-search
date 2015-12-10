@@ -1,6 +1,6 @@
 <?php
 
-	use Trovo\TESS\Core\GoogleSiteSearch\GoogleResult;
+	use Trovo\TESS\GoogleSiteSearch\GoogleResult;
 
 	class GoogleResult_TestCase extends PHPUnit_Framework_TestCase {
 	
