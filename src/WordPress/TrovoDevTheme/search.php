@@ -7,60 +7,41 @@
  * @since Twenty Fifteen 1.0
  */
 
-use \Trovo\TESS\GoogleSiteSearch\GoogleResult;
+use \Trovo\TESS\WordPress\WP_Trovo_Query;
 
 get_header();
 
-$result = new GoogleResult();
+$searchTerm = get_query_var('s');
 
-$result->setTitle("Hello world!");
+$queryArgs = array(
+    "queryTerm" => $searchTerm,
+    "googleAccountId" => "Wouldn't you like to know?"
+);
+
+$searchQuery = new WP_Trovo_Query($queryArgs);
+
+echo $searchQuery->getFirstResultTitle();
 
 ?>
 
 <section id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
 
-        <h3 id="testPlaceholder">Dave's search!</h3>
 
-        <?php
-        echo $result->getTitle();
-        ?>
+        <?php if ( $searchQuery->have_posts() ) : ?>
 
-        <?php if ( have_posts() ) : ?>
+            <!-- pagination here -->
 
-            <header class="page-header">
-                <h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'twentyfifteen' ), get_search_query() ); ?></h1>
-            </header><!-- .page-header -->
+            <!-- the loop -->
+            <?php while ( $searchQuery->have_posts() ) : $searchQuery->the_post(); ?>
+                <h2><?php the_title(); ?></h2>
+            <?php endwhile; ?>
+            <!-- end of the loop -->
 
-            <?php
+        <?php else : ?>
+            <p><?php _e( 'Sorry, search no worky.' ); ?></p>
+        <?php endif; ?>
 
-            // Start the loop.
-            while ( have_posts() ) : the_post(); ?>
-
-                <?php
-                /*
-                 * Run the loop for the search to output the results.
-                 * If you want to overload this in a child theme then include a file
-                 * called content-search.php and that will be used instead.
-                 */
-                get_template_part( 'content', 'search' );
-
-                // End the loop.
-            endwhile;
-
-            // Previous/next page navigation.
-            the_posts_pagination( array(
-                'prev_text'          => __( 'Previous page', 'twentyfifteen' ),
-                'next_text'          => __( 'Next page', 'twentyfifteen' ),
-                'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyfifteen' ) . ' </span>',
-            ) );
-
-        // If no content, include the "No posts found" template.
-        else :
-            get_template_part( 'content', 'none' );
-
-        endif;
-        ?>
 
     </main><!-- .site-main -->
 </section><!-- .content-area -->

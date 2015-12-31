@@ -2,8 +2,6 @@
 
 	namespace Trovo\TESS\GoogleSiteSearch;
 	
-	use Trovo\TESS\Core\IResultPage;
-	use Trovo\TESS\Core\IResult;
 	use XMLReader;
 	use DOMDocument;
 
