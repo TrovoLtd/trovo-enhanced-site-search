@@ -1,0 +1,11 @@
+/*
+Theme Name: Trovo Dev Theme
+Theme URI: www.trovo.co.uk
+Description: A child theme for developing the Trovo Search in the Dev Environment
+Author: David Gerrard
+Author URI: www.trovo.co.uk
+Template: twentyfifteen
+Version: 1.0
+*/
+
+@import url('../twentyfifteen/style.css');

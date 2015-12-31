@@ -3,12 +3,6 @@
 use \Facebook\WebDriver\Remote\RemoteWebDriver;
 use \Facebook\WebDriver\Remote\WebDriverCapabilityType;
 
-/**
- * Created by PhpStorm.
- * User: David
- * Date: 10/12/2015
- * Time: 11:12
- */
 class WordPressPluginInstallTest extends PHPUnit_Framework_TestCase {
 
 	protected $webDriver;
