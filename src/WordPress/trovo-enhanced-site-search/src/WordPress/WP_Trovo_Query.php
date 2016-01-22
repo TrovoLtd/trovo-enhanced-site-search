@@ -29,19 +29,12 @@ class WP_Trovo_Query
         $this->search();
     }
 
-    public function have_posts() {
-        //return $this->_postCounter > 0;
-        return false;
+    public function have_results() {
+        return $this->_postCounter > 0;
     }
 
-    public function the_post() {
-
-        --$this->postCounter;
-        //$post->post_title = $this->_results[$this->_postCounter]->getTitle();
-    }
-
-    public function getFirstResultTitle() {
-        return $this->_results[0]->getTitle();
+    public function get_results() {
+        return $this->_results;
     }
 
     /**

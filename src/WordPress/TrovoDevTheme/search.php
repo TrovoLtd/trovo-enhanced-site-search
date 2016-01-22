@@ -11,16 +11,22 @@ use \Trovo\TESS\WordPress\WP_Trovo_Query;
 
 get_header();
 
+wp_enqueue_style('search', get_stylesheet_directory_uri() . '/search.css');
+
 $searchTerm = get_query_var('s');
+
+$searchOptions = get_option('trovo_search_options');
 
 $queryArgs = array(
     "queryTerm" => $searchTerm,
-    "googleAccountId" => "Wouldn't you like to know?"
+    "googleAccountId" => $searchOptions['gss_account_id']
 );
 
 $searchQuery = new WP_Trovo_Query($queryArgs);
 
-echo $searchQuery->getFirstResultTitle();
+
+
+//echo $searchQuery->getFirstResultTitle();
 
 ?>
 
@@ -28,14 +34,21 @@ echo $searchQuery->getFirstResultTitle();
     <main id="main" class="site-main" role="main">
 
 
-        <?php if ( $searchQuery->have_posts() ) : ?>
+        <?php if ( $searchQuery->have_results() ) : ?>
 
             <!-- pagination here -->
 
             <!-- the loop -->
-            <?php while ( $searchQuery->have_posts() ) : $searchQuery->the_post(); ?>
-                <h2><?php the_title(); ?></h2>
-            <?php endwhile; ?>
+            <?php
+
+                $results = $searchQuery->get_results();
+
+                foreach ($results as $result): ?>
+                <h3 class="search-result-title"><a class="search-result-link" href="<?php echo $result->getUrl(); ?>"><?php echo $result->getTitle(); ?></a></h3>
+
+                    <p class="search-result-snippet"><?php echo $result->getSnippet(); ?></p>
+
+            <?php endforeach; ?>
             <!-- end of the loop -->
 
         <?php else : ?>

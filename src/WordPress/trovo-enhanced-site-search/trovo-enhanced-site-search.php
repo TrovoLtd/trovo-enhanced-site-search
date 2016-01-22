@@ -9,9 +9,10 @@
     License: GPLv2
 */
 
-	spl_autoload_register('trovo_tess_autoload');
 
-	function trovo_tess_autoload($class) {
+	spl_autoload_register('trovo_plugin_autoload');
+
+	function trovo_plugin_autoload($class) {
 
 		$prefix = 'Trovo\\TESS\\';
 		$base_dir = __DIR__ . '/src/';
@@ -30,10 +31,30 @@
 		}
 	}
 
-	$result = new \Trovo\TESS\GoogleSiteSearch\GoogleResult();
 
-	$result->setTitle("Test Results");
+    $plugin_file_name = basename(dirname(__FILE__)).'/'.basename(__FILE__);
 
-	echo $result->getTitle();
+    register_activation_hook($plugin_file_name, 'trovo_search_plugin_install');
+    register_deactivation_hook($plugin_file_name, 'trovo_search_plugin_deactivate');
+
+    function trovo_search_plugin_install()
+    {
+
+        $trovo_search_options = array(
+            'gss_account_id' => 'Add Google Account Id',
+            'number_of_results_per_page' => '10'
+        );
+
+        update_option('trovo_search_options', $trovo_search_options);
+
+    }
+
+    function trovo_search_plugin_deactivate() {
+
+        delete_option('trovo_search_options');
+
+    }
+
+    new \Trovo\TESS\WordPress\GSS_Plugin_Manager;
 
 ?>
