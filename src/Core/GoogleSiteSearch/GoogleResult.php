@@ -1,9 +1,11 @@
 <?php
 
-	require_once(__DIR__.'/../interfaces/interface.IResult.php');
-
-	class GoogleResult implements IResult {
+	namespace Trovo\TESS\Core\GoogleSiteSearch;
+	
+	use Trovo\TESS\Core\Interfaces\IResult;
 		
+	class GoogleResult implements IResult {
+
 		// Private variables
 		
 		private $_rank;
@@ -53,7 +55,6 @@
 		public function setFileType($fileType) {
 			$this->_fileType = $fileType;
 		}
-		
 		
 	}
 
