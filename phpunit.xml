@@ -4,6 +4,9 @@
         <testsuite name="GoogleSiteSearch">
             <directory suffix="Tests.php">tests/GoogleSiteSearch</directory>
         </testsuite>
+        <testsuite name="MockSearch">
+            <directory suffix="Tests.php">tests/MockSearch</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
