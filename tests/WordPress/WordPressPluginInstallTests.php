@@ -1,12 +1,18 @@
 <?php
 
 use \Facebook\WebDriver\Remote\RemoteWebDriver;
+use \Facebook\WebDriver\WebDriverBy;
+use \Facebook\WebDriver\WebDriverKeys;
 use \Facebook\WebDriver\Remote\WebDriverCapabilityType;
+
+// User Acceptance Tests to login to the local instance of Wordpress and install the plugin
 
 class WordPressPluginInstallTest extends PHPUnit_Framework_TestCase {
 
 	protected $webDriver;
-	protected $url = 'http://wordpress.local.domain';
+	protected $url = 'http://wordpress.local.domain/wp-admin';
+	protected $adminAccount = "TestAdmin";
+	protected $adminPassword = "TestAdminPassword";
 
 	public function setUp() {
 
@@ -21,13 +27,33 @@ class WordPressPluginInstallTest extends PHPUnit_Framework_TestCase {
 
 	}
 
-	public function testWordpressAvailable() {
+	// Tests that the login page is available at the set URL
+
+	public function testWordpressAdminAvailable() {
 
 		$this->webDriver->get($this->url);
-		$this->assertContains('WordPress', $this->webDriver->getTitle());
+		$this->assertEquals('Irish Academic Press Development › Log In', $this->webDriver->getTitle());
 	}
 
-	// test can login to wordpress with generic development password
+	// test can login to WordPress with generic development password
+
+	public function testCanLoginToWordpress() {
+
+		$this->webDriver->get($this->url);
+
+		$loginNameField = $this->webDriver->findElement(WebDriverBy::id('user_login'));
+		$loginNameField->click();
+		$this->webDriver->getKeyboard()->sendKeys($this->adminAccount);
+
+		$loginPasswordField = $this->webDriver->findElement(WebDriverBy::id('user_pass'));
+		$loginPasswordField->click();
+		$this->webDriver->getKeyboard()->sendKeys($this->adminPassword);
+
+		$this->webDriver->getKeyboard()->sendKeys(WebDriverKeys::ENTER);
+
+		$this->assertContains('Dashboard', $this->webDriver->getTitle());
+
+	}
 
 	// test can browse to plugins folder
 
