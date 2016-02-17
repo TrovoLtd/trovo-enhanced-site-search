@@ -32,13 +32,41 @@ class WordPressPluginInstallTest extends PHPUnit_Framework_TestCase {
 	public function testWordpressAdminAvailable() {
 
 		$this->webDriver->get($this->url);
-		$this->assertEquals('Irish Academic Press Development › Log In', $this->webDriver->getTitle());
+		$this->assertEquals('Wordpress Development Site › Log In', $this->webDriver->getTitle());
 	}
 
 	// test can login to WordPress with generic development password
 
 	public function testCanLoginToWordpress() {
 
+		$this->loginToWordPress();
+
+		$this->assertContains('Dashboard', $this->webDriver->getTitle());
+
+	}
+
+	// test plugin is available on plugins page
+
+	public function testTrovoSiteSearchPluginAvailable()
+	{
+		$this->loginToWordPress();
+
+		$pluginLink = $this->webDriver->findElement(WebDriverBy::id('menu-plugins'));
+
+		$pluginLink->click();
+
+		$this->assertNotEquals(0, $this->webDriver->findElement(WebDriverBy::id('trovo-enhanced-site-search')));
+
+
+	}
+
+
+	// test can install plugin
+
+	// helper functions that perform repeated tasks
+
+	private function loginToWordPress()
+	{
 		$this->webDriver->get($this->url);
 
 		$loginNameField = $this->webDriver->findElement(WebDriverBy::id('user_login'));
@@ -51,12 +79,6 @@ class WordPressPluginInstallTest extends PHPUnit_Framework_TestCase {
 
 		$this->webDriver->getKeyboard()->sendKeys(WebDriverKeys::ENTER);
 
-		$this->assertContains('Dashboard', $this->webDriver->getTitle());
-
 	}
-
-	// test can browse to plugins folder
-
-	// test can install plugin
 
 }
