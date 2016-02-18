@@ -17,8 +17,6 @@
 	
 		function testGetResults() {
 				
-			$testResults = array();
-				
 			for($i=0; $i<10; $i++) {
 	
 				$testResult = new GoogleResult();
