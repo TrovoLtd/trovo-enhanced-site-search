@@ -11,10 +11,6 @@ namespace Trovo\TESS\Core;
 interface IResultSet
 {
     public function getQueryArgs();
-    public function setQueryArgs($queryArgs);
-
-    //public function getQuery();
-    //public function setQuery(IQuery $query);
 
     public function getCurrentResultPage();
 

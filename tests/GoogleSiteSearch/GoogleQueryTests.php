@@ -5,14 +5,23 @@ use \Trovo\TESS\GoogleSiteSearch\GoogleQuery;
 class GoogleQueryTest extends PHPUnit_Framework_TestCase
 {
 
-    public function testQueryArgsSet() {
+    private $_testQueryArgs;
 
-        $testArray = array(
-          "queryTerm" => "camera",
-            "googleAccountId" => "1234"
+    public function setUp()
+    {
+        $this->_testQueryArgs = array(
+            "queryTerm" => "camera",
+            "googleAccountId" => "1234",
+            "googleBaseUrl" => "http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx="
         );
 
-        $testQuery = new GoogleQuery($testArray);
+    }
+
+    public function testQueryArgsSet() {
+
+
+
+        $testQuery = new GoogleQuery($this->_testQueryArgs);
 
         $result = $testQuery->getQueryArgs();
 
@@ -22,12 +31,7 @@ class GoogleQueryTest extends PHPUnit_Framework_TestCase
 
     public function testQueryTermSet() {
 
-        $testArray = array(
-            "queryTerm" => "camera",
-            "googleAccountId" => "1234"
-        );
-
-        $testQuery = new GoogleQuery($testArray);
+        $testQuery = new GoogleQuery($this->_testQueryArgs);
 
         $result = $testQuery->getQueryTerm();
 
@@ -58,12 +62,7 @@ class GoogleQueryTest extends PHPUnit_Framework_TestCase
 
     public function testGoogleAccountIdSet() {
 
-        $testArray = array(
-            "queryTerm" => "camera",
-            "googleAccountId" => "1234"
-        );
-
-        $testQuery = new GoogleQuery($testArray);
+        $testQuery = new GoogleQuery($this->_testQueryArgs);
 
         $result = $testQuery->getGoogleAccountId();
 
@@ -89,24 +88,65 @@ class GoogleQueryTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals("camera", $result);
 
+    }
+
+    public function testGoogleBaseQueryUrlSet() {
+
+        $testQuery = new GoogleQuery($this->_testQueryArgs);
+
+        $result = $testQuery->getGoogleBaseUrl();
+
+        $this->assertEquals("http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx=", $result);
+    }
+
+    /**
+     * @expectedException           InvalidArgumentException
+     * @expectedExceptionMessage    The Google Base Url was not properly labelled in the query args array. The correct label is googleBaseUrl.
+     */
+
+    public function testArgsArrayHasImproperlyLabelledGoogleBaseUrl() {
+
+        $testArray = array(
+            "queryTerm" => "camera",
+            "googleAccountId" => "1234",
+            "googleBastedUrl" => "Doesn't need a URL as the bad label will cause an exception to be thrown"
+        );
+
+        $testQuery = new GoogleQuery($testArray);
+
+        $result = $testQuery->getQueryTerm();
+
+        $this->assertEquals("camera", $result);
 
     }
+
 
     public function testGetGoogleQueryUrl() {
 
 
-        $testArray = array(
-            "queryTerm" => "camera",
-            "googleAccountId" => "1234"
-        );
-
-        $testQuery = new GoogleQuery($testArray);
+        $testQuery = new GoogleQuery($this->_testQueryArgs);
 
         $expectedResult =  "http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx=1234&q=camera&num=10&start=0";
 
         $result = $testQuery->getGoogleQueryURL();
 
         $this->assertEquals($expectedResult, $result);
+
+    }
+
+    public function testGoogleQueryUrlWithSpaceInQuery() {
+
+        $testArray = array(
+            "queryTerm" => "racing car",
+            "googleAccountId" => "1234",
+            "googleBaseUrl" => "http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx="
+        );
+
+        $testQuery = new GoogleQuery($testArray);
+
+        $result = $testQuery->getGoogleQueryURL();
+
+        $this->assertEquals("http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx=1234&q=racing+car&num=10&start=0", $result);
 
     }
 

@@ -1,10 +1,16 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: david
+ * Date: 25/02/2016
+ * Time: 13:46
+ */
 
-namespace Trovo\TESS\GoogleSiteSearch;
+namespace Trovo\TESS\MockSearch;
 
 use Trovo\TESS\Core\IResultSet;
 
-class GoogleResultSet implements IResultSet
+class MockResultSet implements IResultSet
 {
 
     private $_queryArgs = array();
@@ -14,11 +20,13 @@ class GoogleResultSet implements IResultSet
 
     public function __construct($queryArgs) {
         $this->_queryArgs = $queryArgs;
+        $this->_queryArgs["queryTerm"];
         $this->search();
     }
 
-    public function getQueryArgs() {
-        return $this->_queryArgs;
+    public function getQueryArgs()
+    {
+        return $this->_query;
     }
 
     public function getCurrentResultPage()
@@ -28,15 +36,15 @@ class GoogleResultSet implements IResultSet
 
     private function search() {
 
-        $this->_query = new GoogleQuery($this->_queryArgs);
         $myXMLReader = new \XMLReader();
 
-        $xmlFilePath = $this->_query->getGoogleQueryURL();
+        $xmlFilePath = dirname(__FILE__) . '/mockSearchResults.xml';
 
         $myXMLReader->open($xmlFilePath,
             'utf-8',
             LIBXML_NOBLANKS);
-        $this->_resultPageBuilder = new GoogleResultPageBuilder($myXMLReader);
+        $this->_resultPageBuilder = new MockResultPageBuilder($myXMLReader);
+        $this->_resultPageBuilder->search($this->_queryArgs["queryTerm"]);
 
         $this->_currentResultPage = $this->_resultPageBuilder->getResultPage();
 

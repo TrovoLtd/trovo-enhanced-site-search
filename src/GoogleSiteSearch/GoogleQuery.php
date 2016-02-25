@@ -11,6 +11,7 @@ class GoogleQuery implements IQuery
 
     private $_queryTerm;
     private $_googleAccountId;
+    private $_googleBaseUrl;
 
     public function __construct($queryArgs) {
         $this->_queryArgs = $queryArgs;
@@ -36,9 +37,13 @@ class GoogleQuery implements IQuery
         return $this->_googleAccountId;
     }
 
+    public function getGoogleBaseUrl() {
+        return $this->_googleBaseUrl;
+    }
+
     public function getGoogleQueryURL() {
 
-        return "http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx=" . $this->_googleAccountId . "&q=" . $this->_queryTerm . "&num=10&start=0";
+        return $this->_googleBaseUrl . $this->_googleAccountId . "&q=" . urlencode($this->_queryTerm) . "&num=10&start=0";
     }
 
     private function setGoogleVariables($queryArgs) {
@@ -51,8 +56,13 @@ class GoogleQuery implements IQuery
             throw new \InvalidArgumentException("The Google Account Id was not properly labelled in the query args array. The correct label is googleAccountId.");
         }
 
+        if(!isset($this->_queryArgs["googleBaseUrl"])) {
+            throw new \InvalidArgumentException("The Google Base Url was not properly labelled in the query args array. The correct label is googleBaseUrl.");
+        }
+
         $this->_queryTerm = $this->_queryArgs["queryTerm"];
         $this->_googleAccountId = $this->_queryArgs["googleAccountId"];
+        $this->_googleBaseUrl = $this->_queryArgs["googleBaseUrl"];
 
     }
 

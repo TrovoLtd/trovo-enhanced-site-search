@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="vendor/autoload.php">
     <testsuites>
+        <testsuite name="Core">
+            <directory suffix="Tests.php">tests/Core</directory>
+        </testsuite>
         <testsuite name="GoogleSiteSearch">
             <directory suffix="Tests.php">tests/GoogleSiteSearch</directory>
         </testsuite>

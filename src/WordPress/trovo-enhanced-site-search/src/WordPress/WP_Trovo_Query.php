@@ -7,7 +7,7 @@
 
 namespace Trovo\TESS\WordPress;
 
-use \Trovo\TESS\GoogleSiteSearch\GoogleResultSet;
+use Trovo\TESS\Core\SearchProviderFactory;
 
 /**
  * Reference to the Global post object allows search results to be added to the standard WordPress Loop
@@ -37,13 +37,12 @@ class WP_Trovo_Query
         return $this->_results;
     }
 
-    /**
-     * Just hard coding a Google Search in at the moment
-     */
-
     private function search() {
 
-        $resultSet = new GoogleResultSet($this->_queryArgs);
+
+        $searchProviderFactory = new SearchProviderFactory($this->_queryArgs);
+
+        $resultSet = $searchProviderFactory->getProvider();
         $this->_resultPage = $resultSet->getCurrentResultPage();
         $this->_results = $this->_resultPage->getResults();
         $this->_postCounter = count($this->_results);
