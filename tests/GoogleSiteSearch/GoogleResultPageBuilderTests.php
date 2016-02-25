@@ -19,7 +19,7 @@
 					LIBXML_NOBLANKS);
 			$this->myGoogleResultPageBuilder = new GoogleResultPageBuilder($myXMLReader);
 		}
-	
+
 		function tearDown() {
 			unset($this->myGoogleResultPageBuilder);
 			unset($this->myXMLReader);

@@ -22,8 +22,7 @@
 			$doc = new DOMDocument();
 				
 			while($this->_resultsXMLReader->read() && $this->_resultsXMLReader->name !== 'R');
-				
-				
+
 			while ($this->_resultsXMLReader->name === 'R') {
 	
 				$node = simplexml_import_dom($doc->importNode($this->_resultsXMLReader->expand(), true));
@@ -40,6 +39,8 @@
 				$this->_resultsXMLReader->next('R');
 	
 			}
+
+			$this->_resultsXMLReader->close();
 				
 		}
 	
