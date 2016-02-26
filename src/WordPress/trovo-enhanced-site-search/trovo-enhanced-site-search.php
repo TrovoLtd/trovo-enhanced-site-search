@@ -40,21 +40,28 @@
     function trovo_search_plugin_install()
     {
 
-        $trovo_search_options = array(
-            'gss_account_id' => 'Add Google Account Id',
-            'number_of_results_per_page' => '10'
+		$trovo_general_search_options = array(
+            'search_provider' => 'Mock',
+            'number_of_results_per_page' => 10
         );
 
-        update_option('trovo_search_options', $trovo_search_options);
+        $trovo_google_site_search_options = array(
+            'gss_account_id' => 'Add Google Account Id',
+            'gss_base_url' => 'http://www.google.com/cse?client=google-csbe&output=xml_no_dtd&cx='
+        );
+
+        update_option('trovo_general_search_options', $trovo_general_search_options);
+        update_option('trovo_google_site_search_options', $trovo_google_site_search_options);
 
     }
 
     function trovo_search_plugin_deactivate() {
 
-        delete_option('trovo_search_options');
+        delete_option('trovo_general_search_options');
+        delete_option('trovo_google_site_search_options');
 
     }
 
-    new \Trovo\TESS\WordPress\GSS_Plugin_Manager;
+    new \Trovo\TESS\WordPress\TESS_Plugin_Manager;
 
 ?>
